@@ -30,25 +30,25 @@ Initializing a value:
 ```js
 const { BigVal } = require('bigval')
 
-const v1 = new BigVal(255)
-const v2 = new BigVal('255')
-const v3 = new BigVal('0xFF')
-const v4 = new BigVal('b11111111')
-const v5 = new BigVal(new BigVal(255))
+const v1 = new BigVal(1000000000000000000)
+const v2 = new BigVal('1000000000000000000')
+const v3 = new BigVal('0xde0b6b3a7640000')
+const v4 = new BigVal('b1000000000000000000')
+const v5 = new BigVal(new BigVal(1000000000000000000))
 ```
 
 Simple arithmetic leaves original unchanged:
 
 ```js
-const v = new BigVal(255)
+const v = new BigVal(1000000000000000000)
 
 const v2 = v.add(32) // v2 is a new instance of BigVal
 
 console.log(v2 !== v) // true
 
-console.log(v2.toString()) // "287"
+console.log(v2.toString()) // "1000000000000000032"
 
-console.log(v.toString()) // "255" - original unchanged
+console.log(v.toString()) // "1000000000000000000" - original unchanged
 ```
 
 Output in different types:
