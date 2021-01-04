@@ -1,0 +1,52 @@
+{
+  "name": "bigval",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "author": "erdDEV team (https://erd.dev)",
+  "homepage": "https://erddevcode.github.io/bigval/",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "CHANGELOG.md",
+    "LICENSE.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erdDEVcode/bigval.git"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "gh-pages": "^3.1.0",
+    "husky": "^4.3.0",
+    "semantic-release": "^17.2.2",
+    "typedoc": "^0.19.2",
+    "typescript": "^4.0.5"
+  },
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig-esm.json",
+    "dev": "tsc --watch",
+    "build-docs": "rm -rf ./docs && typedoc",
+    "publish-docs": "npm run build-docs && gh-pages -d docs",
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm run publish-docs",
+    "release": "semantic-release"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "decimal.js": "^10.2.1"
+  }
+}
