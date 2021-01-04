@@ -1,5 +1,8 @@
 import { Decimal } from 'decimal.js'
 
+/**
+ * @internal
+ */
 const PreciseDecimal = Decimal.clone({ defaults: true, toExpPos: 33 })
 
 /**
@@ -11,7 +14,7 @@ const toDecimal = (a: any): Decimal => {
   if (a) {
     if (a._hex) {
       a = a._hex
-    } else if (a._isbigvalber) {
+    } else if (a._isBigValber) {
       a = a.toString(10)
     }
   }
@@ -26,23 +29,31 @@ const toDecimal = (a: any): Decimal => {
  * @param reference Reference value.
  * @internal
  */
-const toDecimalAtOriginalScale = (input: any, reference: bigval): Decimal => (
+const toDecimalAtOriginalScale = (input: any, reference: BigVal): Decimal => (
   input._n ? input.toScale(reference.scale)._n : toDecimal(input)
 )
 
 /**
- * The scale of a `bigval` instance.
+ * The scale of a `BigVal` instance.
+ * 
+ * For example, if the no. of `decimals` in the `BigValConfig` is set to `2` then a value of `1` at `NORMAL` scale = `1` and at `SMALLEST` scale = `100`.
  */
-export enum bigvalScale {
+export enum BigValScale {
+  /**
+   * Smallest scale at which to represent values.
+   */
   SMALLEST = 0,
+  /**
+   * Normal scale at which to represent values.
+   */
   NORMAL = 1,
 }
 
 
 /**
- * `bigval` configuration.
+ * `BigVal` configuration.
  */
-export interface bigvalConfig {
+export interface BigValConfig {
   /**
    * No. of decimals values will have. Default is 18.
    */
@@ -54,48 +65,83 @@ export interface bigvalConfig {
 /**
  * Represents an arbitrarily large or small number with decimals.
  * 
- * At any given time a `bigval` instance operates at a particular number _scale_. The scale is based on the 
- * the no. of `decimals` specified in the configuration (`bigvalConfig`). The `bigvalScale.SMALLEST` scale 
- * is for numbers which are do not have decimal places since they are already denominated in the smallest 
- * possible unit. The `bigvalScale.NORMAL` scale is for numbers which implicitly have decimal places.
+ * At any given time a `BigVal` instance operates at a particular number _scale_. The scale is based on the 
+ * the no. of `decimals` specified in the configuration (`BigValConfig`). The `BigValScale.SMALLEST` scale 
+ * is for numbers which do not have decimal places since they are already denominated in the smallest 
+ * possible unit. The `BigValScale.NORMAL` scale is for numbers which implicitly have decimal places.
  * 
- * For example, if a given `bigval` has `decimals = 2` then the following two numbers are equivalent in value:
+ * For example, if a given `BigVal` has `decimals = 2` then the following two numbers are equivalent in value:
  * 
- * - bigvalScale.SMALLEST, value = 100
- * - bigvalScale.NORMAL, value = 1
+ * - `BigValScale.SMALLEST`, value = `100`
+ * - `BigValScale.NORMAL`, value = `1`
  * 
- * If `decimals` is 18 (this is the default) then the following two numbers are equivalent in value:
+ * If `decimals = 18` (this is the default) then the following two numbers are equivalent in value:
  * 
- * - bigvalScale.SMALLEST, value = 1000000000000000000
- * - bigvalScale.NORMAL, value = 1
+ * - `BigValScale.SMALLEST`, value = `1000000000000000000`
+ * - `BigValScale.NORMAL`, value = 1
  * 
- * The use of scales like this makes it easy to perform arithmetic at the desired precision.
+ * The use of scales like this makes it easy to convert between chain-friendly and user-friendly values and perform arithmetic at the desired precision.
  * 
- * All the arithmetic methods are immutable, i.e. they return a new `bigval` instance, leaving the original inputs unchanged.
+ * All the arithmetic methods are immutable, i.e. they return a new `BigVal` instance, leaving the original inputs unchanged.
  */
-export class bigval {
+export class BigVal {
+  /**
+   * @internal
+   */
   _n: Decimal
-  _scale: bigvalScale
-  _config: bigvalConfig
-  // these will be set in the constructor
-  mul: any
-  sub: any
-  div: any
-  add: any
-  gt: any
-  gte: any
-  lt: any
-  lte: any
-  eq: any
+  /**
+   * @internal
+   */
+  _scale: BigValScale
+  /**
+   * @internal
+   */
+  _config: BigValConfig
+  /**
+   * Multiply with another number.
+   */
+  mul!: (v: any) => BigVal
+  /**
+   * Subtract another number from this one.
+   */
+  sub!: (v: any) => BigVal
+  /**
+   * Divide this by another number.
+   */
+  div!: (v: any) => BigVal
+  /**
+   * Add another number to this one.
+   */
+  add!: (v: any) => BigVal
+  /**
+   * Get whether this is greater than another number.
+   */
+  gt!: (v: any) => boolean
+  /**
+   * Get whether this is greater than or equal to another number.
+   */
+  gte!: (v: any) => boolean
+  /**
+   * Get whether this is less than another number.
+   */
+  lt!: (v: any) => boolean
+  /**
+   * Get whether this is less than or equal to than another number.
+   */
+  lte!: (v: any) => boolean
+  /**
+   * Get whether this is equal to another number.
+   */
+  eq!: (v: any) => boolean
 
   /**
    * @constructor
-   * @param src Input number. If this is a `bigval` instance then `scale` and `config` parameters will be ignored.
+   * @param src Input number. If this is a `BigVal` instance then `scale` and `config` parameters will be ignored.
    * @param scale The scale of the input number.
    * @param config Custom configuration for this instance.
    */
-  constructor(src: any, scale: bigvalScale = bigvalScale.SMALLEST, config: bigvalConfig = { decimals: 18 }) {
-    if (src instanceof bigval) {
+  constructor(src: any, scale: BigValScale = BigValScale.SMALLEST, config: BigValConfig = { decimals: 18 }) {
+    if (src instanceof BigVal) {
       this._n = toDecimal(src._n)
       this._scale = src.scale
       this._config = src.config
@@ -107,7 +153,7 @@ export class bigval {
 
     ;['mul', 'sub', 'div', 'add'].forEach(method => {
       (this as any)[method] = (v: any) => (
-        new bigval((this._n as any)[method].call(this._n, toDecimalAtOriginalScale(v, this)), this._scale, this._config)
+        new BigVal((this._n as any)[method].call(this._n, toDecimalAtOriginalScale(v, this)), this._scale, this._config)
       )
     })
 
@@ -121,49 +167,49 @@ export class bigval {
   /**
    * Get current scale.
    */
-  get scale(): bigvalScale {
+  get scale(): BigValScale {
     return this._scale
   }
 
   /**
    * Get config.
    */
-  get config(): bigvalConfig {
+  get config(): BigValConfig {
     return this._config
   }
 
   /**
-   * Multiply by 10 to the power given input value.
+   * Multiply by the given power of 10.
    * @param v The power of 10.
    */
-  scaleDown(v: any): bigval {
+  scaleDown(v: any): BigVal {
     return this.mul(toDecimal(10).pow(toDecimal(v)))
   }
 
   /**
-   * Divide by 10 to the power given input value.
+   * Divide by the given power of 10.
    * @param v The power of 10.
    */
-  scaleUp(v: any): bigval {
+  scaleUp(v: any): BigVal {
     return this.div(toDecimal(10).pow(toDecimal(v)))
   }
 
   /**
    * Round to the nearest whole number.
    */
-  round(): bigval {
-    return new bigval(this._n.toDecimalPlaces(0), this._scale, this._config)
+  round(): BigVal {
+    return new BigVal(this._n.toDecimalPlaces(0), this._scale, this._config)
   }
 
   /**
    * Convert to smallest scale.
    */
-  toSmallestScale(): bigval {
-    if (this._scale === bigvalScale.SMALLEST) {
+  toSmallestScale(): BigVal {
+    if (this._scale === BigValScale.SMALLEST) {
       return this
     } else {
       const n = this.scaleDown(this._config.decimals)
-      n._scale = bigvalScale.SMALLEST
+      n._scale = BigValScale.SMALLEST
       return n
     }
   }
@@ -171,12 +217,12 @@ export class bigval {
   /**
    * Convert to normal scale.
    */
-  toNormalScale(): bigval {
-    if (this._scale === bigvalScale.NORMAL) {
+  toNormalScale(): BigVal {
+    if (this._scale === BigValScale.NORMAL) {
       return this
     } else {
       const n = this.scaleUp(this._config.decimals)
-      n._scale = bigvalScale.NORMAL
+      n._scale = BigValScale.NORMAL
       return n
     }
   }
@@ -186,11 +232,11 @@ export class bigval {
    * 
    * @param scale Scale to convert to.
    */
-  toScale(scale: bigvalScale): bigval {
+  toScale(scale: BigValScale): BigVal {
     switch (scale) {
-      case bigvalScale.SMALLEST:
+      case BigValScale.SMALLEST:
         return this.toSmallestScale()
-      case bigvalScale.NORMAL:
+      case BigValScale.NORMAL:
         return this.toNormalScale()
       default:
         throw new Error(`Unrecognized scale: ${scale}`)
