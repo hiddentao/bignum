@@ -14,7 +14,7 @@ const toDecimal = (a: any): Decimal => {
   if (a) {
     if (a._hex) {
       a = a._hex
-    } else if (a._isBigValber) {
+    } else if (a._isBigNumber) {
       a = a.toString(10)
     }
   }
