@@ -208,7 +208,7 @@ export class BigVal {
   /**
    * Convert to 'min' scale.
    */
-  tominScale(): BigVal {
+  toMinScale(): BigVal {
     if (this._scale === SCALE.min) {
       return this
     } else {
@@ -219,7 +219,7 @@ export class BigVal {
   }
 
   /**
-   * Convert to normal scale.
+   * Convert to 'coins' scale.
    */
   toCoinsScale(): BigVal {
     if (this._scale === SCALE.coins) {
@@ -241,7 +241,7 @@ export class BigVal {
 
     switch (scale) {
       case SCALE.min:
-        return this.tominScale()
+        return this.toMinScale()
       case SCALE.coins:
         return this.toCoinsScale()
       default:
