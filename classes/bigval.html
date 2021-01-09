@@ -45,9 +45,6 @@
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-enum">
-			<a href="../enums/bigvalscale.html" class="tsd-kind-icon">Big<wbr>Val<wbr>Scale</a>
-		</li>
 		<li class="current tsd-kind-class">
 			<a href="bigval.html" class="tsd-kind-icon">Big<wbr>Val</a>
 			<ul>
@@ -97,10 +94,10 @@
 					<a href="bigval.html#scaleup" class="tsd-kind-icon">scale<wbr>Up</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="bigval.html#tofixed" class="tsd-kind-icon">to<wbr>Fixed</a>
+					<a href="bigval.html#tocoinsscale" class="tsd-kind-icon">to<wbr>Coins<wbr>Scale</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="bigval.html#tonormalscale" class="tsd-kind-icon">to<wbr>Normal<wbr>Scale</a>
+					<a href="bigval.html#tofixed" class="tsd-kind-icon">to<wbr>Fixed</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="bigval.html#tonumber" class="tsd-kind-icon">to<wbr>Number</a>
@@ -109,10 +106,10 @@
 					<a href="bigval.html#toscale" class="tsd-kind-icon">to<wbr>Scale</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="bigval.html#tosmallestscale" class="tsd-kind-icon">to<wbr>Smallest<wbr>Scale</a>
+					<a href="bigval.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="bigval.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+					<a href="bigval.html#tominscale" class="tsd-kind-icon">tomin<wbr>Scale</a>
 				</li>
 			</ul>
 		</li>
@@ -128,22 +125,20 @@
 				<div class="lead">
 					<p>Represents an arbitrarily large or small number with decimals.</p>
 				</div>
-				<p>At any given time a <code>BigVal</code> instance operates at a particular number <em>scale</em>. The scale is based on the
-					the no. of <code>decimals</code> specified in the configuration (<code>BigValConfig</code>). The <code>BigValScale.SMALLEST</code> scale
-					is for numbers which do not have decimal places since they are already denominated in the smallest
-				possible unit. The <code>BigValScale.NORMAL</code> scale is for numbers which implicitly have decimal places.</p>
+				<p>All the arithmetic methods are immutable, i.e. they return a new <code>BigVal</code> instance, leaving the original inputs unchanged.</p>
+				<p>At any given time a <code>BigVal</code> instance operates at a particular number <em>scale</em>. The scale is based on the the no. of <code>decimals</code> specified in the configuration (<code>BigValConfig</code>).</p>
+				<p>The <code>min</code> scale is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The <code>coins</code> scale is for numbers which implicitly have decimal places.</p>
 				<p>For example, if a given <code>BigVal</code> has <code>decimals = 2</code> then the following two numbers are equivalent in value:</p>
 				<ul>
-					<li><code>BigValScale.SMALLEST</code>, value = <code>100</code></li>
-					<li><code>BigValScale.NORMAL</code>, value = <code>1</code></li>
+					<li>scale = <code>min</code>, value = <code>100</code></li>
+					<li>scale = <code>coins</code>, value = <code>1</code></li>
 				</ul>
 				<p>If <code>decimals = 18</code> (this is the default) then the following two numbers are equivalent in value:</p>
 				<ul>
-					<li><code>BigValScale.SMALLEST</code>, value = <code>1000000000000000000</code></li>
-					<li><code>BigValScale.NORMAL</code>, value = 1</li>
+					<li>scale = <code>min</code>, value = <code>1000000000000000000</code></li>
+					<li>scale = <code>coins</code>, value = 1</li>
 				</ul>
 				<p>The use of scales like this makes it easy to convert between chain-friendly and user-friendly values and perform arithmetic at the desired precision.</p>
-				<p>All the arithmetic methods are immutable, i.e. they return a new <code>BigVal</code> instance, leaving the original inputs unchanged.</p>
 			</div>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
@@ -191,12 +186,12 @@
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#round" class="tsd-kind-icon">round</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#scaledown" class="tsd-kind-icon">scale<wbr>Down</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#scaleup" class="tsd-kind-icon">scale<wbr>Up</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tocoinsscale" class="tsd-kind-icon">to<wbr>Coins<wbr>Scale</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tofixed" class="tsd-kind-icon">to<wbr>Fixed</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tonormalscale" class="tsd-kind-icon">to<wbr>Normal<wbr>Scale</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tonumber" class="tsd-kind-icon">to<wbr>Number</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#toscale" class="tsd-kind-icon">to<wbr>Scale</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tosmallestscale" class="tsd-kind-icon">to<wbr>Smallest<wbr>Scale</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="bigval.html#tominscale" class="tsd-kind-icon">tomin<wbr>Scale</a></li>
 						</ul>
 					</section>
 				</div>
@@ -208,13 +203,13 @@
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Big<wbr>Val<span class="tsd-signature-symbol">(</span>src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, scale<span class="tsd-signature-symbol">?: </span><a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/bigvalconfig.html" class="tsd-signature-type">BigValConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Big<wbr>Val<span class="tsd-signature-symbol">(</span>src<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, scale<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/bigvalconfig.html" class="tsd-signature-type">BigValConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L135">index.ts:135</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L138">index.ts:138</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -230,10 +225,10 @@
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> scale: <a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a><span class="tsd-signature-symbol"> = BigValScale.SMALLEST</span></h5>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> scale: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;min&quot;</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
-										<p>The scale of the input number.</p>
+										<p>The scale of the input number. Default is <code>min</code>.</p>
 									</div>
 								</div>
 							</li>
@@ -259,7 +254,7 @@
 				<div class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L115">index.ts:115</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L118">index.ts:118</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -295,7 +290,7 @@
 				<div class="tsd-signature tsd-kind-icon">div<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L111">index.ts:111</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L114">index.ts:114</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -331,7 +326,7 @@
 				<div class="tsd-signature tsd-kind-icon">eq<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L135">index.ts:135</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L138">index.ts:138</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -367,7 +362,7 @@
 				<div class="tsd-signature tsd-kind-icon">gt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L119">index.ts:119</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L122">index.ts:122</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -403,7 +398,7 @@
 				<div class="tsd-signature tsd-kind-icon">gte<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L123">index.ts:123</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L126">index.ts:126</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -439,7 +434,7 @@
 				<div class="tsd-signature tsd-kind-icon">lt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L127">index.ts:127</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L130">index.ts:130</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -475,7 +470,7 @@
 				<div class="tsd-signature tsd-kind-icon">lte<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L131">index.ts:131</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L134">index.ts:134</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -511,7 +506,7 @@
 				<div class="tsd-signature tsd-kind-icon">mul<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L103">index.ts:103</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L106">index.ts:106</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -547,7 +542,7 @@
 				<div class="tsd-signature tsd-kind-icon">sub<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L107">index.ts:107</a></li>
+						<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L110">index.ts:110</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -590,7 +585,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L177">index.ts:177</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L181">index.ts:181</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -606,13 +601,13 @@
 				<a name="scale" class="tsd-anchor"></a>
 				<h3>scale</h3>
 				<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a></li>
+					<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L170">index.ts:170</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L174">index.ts:174</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -620,7 +615,7 @@
 								<p>Get current scale.</p>
 							</div>
 						</div>
-						<h4 class="tsd-returns-title">Returns <a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -637,7 +632,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L200">index.ts:200</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L204">index.ts:204</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -659,7 +654,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L185">index.ts:185</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L189">index.ts:189</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -690,7 +685,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L193">index.ts:193</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L197">index.ts:197</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -712,6 +707,28 @@
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="tocoinsscale" class="tsd-anchor"></a>
+				<h3>to<wbr>Coins<wbr>Scale</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Coins<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L224">index.ts:224</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Convert to normal scale.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <a href="bigval.html" class="tsd-signature-type">BigVal</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="tofixed" class="tsd-anchor"></a>
 				<h3>to<wbr>Fixed</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -721,7 +738,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L270">index.ts:270</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L276">index.ts:276</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -743,28 +760,6 @@
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="tonormalscale" class="tsd-anchor"></a>
-				<h3>to<wbr>Normal<wbr>Scale</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">to<wbr>Normal<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L220">index.ts:220</a></li>
-							</ul>
-						</aside>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>Convert to normal scale.</p>
-							</div>
-						</div>
-						<h4 class="tsd-returns-title">Returns <a href="bigval.html" class="tsd-signature-type">BigVal</a></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="tonumber" class="tsd-anchor"></a>
 				<h3>to<wbr>Number</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -774,7 +769,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L277">index.ts:277</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L283">index.ts:283</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -790,13 +785,13 @@
 				<a name="toscale" class="tsd-anchor"></a>
 				<h3>to<wbr>Scale</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">to<wbr>Scale<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Scale<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L235">index.ts:235</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L239">index.ts:239</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -807,34 +802,12 @@
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>scale: <a href="../enums/bigvalscale.html" class="tsd-signature-type">BigValScale</a></h5>
+								<h5>scale: <span class="tsd-signature-type">string</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>Scale to convert to.</p>
 								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="bigval.html" class="tsd-signature-type">BigVal</a></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="tosmallestscale" class="tsd-anchor"></a>
-				<h3>to<wbr>Smallest<wbr>Scale</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">to<wbr>Smallest<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L207">index.ts:207</a></li>
-							</ul>
-						</aside>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>Convert to smallest scale.</p>
-							</div>
-						</div>
 						<h4 class="tsd-returns-title">Returns <a href="bigval.html" class="tsd-signature-type">BigVal</a></h4>
 					</li>
 				</ul>
@@ -849,7 +822,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/6d690a0/src/index.ts#L251">index.ts:251</a></li>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L257">index.ts:257</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -867,6 +840,28 @@
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="tominscale" class="tsd-anchor"></a>
+				<h3>tomin<wbr>Scale</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">tomin<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="bigval.html" class="tsd-signature-type">BigVal</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/c62449d/src/index.ts#L211">index.ts:211</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Convert to &#39;min&#39; scale.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <a href="bigval.html" class="tsd-signature-type">BigVal</a></h4>
 					</li>
 				</ul>
 			</section>

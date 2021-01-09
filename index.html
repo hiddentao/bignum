@@ -45,9 +45,6 @@
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-enum">
-			<a href="enums/bigvalscale.html" class="tsd-kind-icon">Big<wbr>Val<wbr>Scale</a>
-		</li>
 		<li class=" tsd-kind-class">
 			<a href="classes/bigval.html" class="tsd-kind-icon">Big<wbr>Val</a>
 		</li>
@@ -65,8 +62,8 @@
 			<a href="#bigval" id="bigval" style="color: inherit; text-decoration: none;">
 				<h1>bigval</h1>
 			</a>
-			<p>Javascript library for representing arbitrarily large or small numbers with decimals. </p>
-			<p><code>bigval</code> is useful for handling extremely large numbers with precision, e.g. when performing arithmetic with cryptocurrency balances. \</p>
+			<p>Javascript library for representing arbitrarily large or small crypto values with decimals. </p>
+			<p><code>bigval</code> is useful for handling extremely large crypto numbers with precision, e.g. when performing arithmetic with balances.</p>
 			<p>It is inspired by <a href="https://github.com/hiddentao/ethval">ethval</a>.</p>
 			<p>Features:</p>
 			<ul>
@@ -132,34 +129,34 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 <span class="hljs-keyword">const</span> isGreater = v.gte(<span class="hljs-number">254</span>)
 
 <span class="hljs-built_in">console</span>.log( isGreater ) <span class="hljs-comment">// true</span></code></pre>
-			<p>Built-in scaling based no. of decimals:</p>
-			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">100</span>, BigValScale.SMALLEST, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> })
+			<p>Built-in scaling based on no. of decimals:</p>
+			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;min&#x27;</span>, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> }) <span class="hljs-comment">// same as new BigVal(1, &#x27;coins&#x27;, { decimals: 2 })</span>
 
-<span class="hljs-built_in">console</span>.log( v.scale ) <span class="hljs-comment">// BigValScale.SMALLEST</span>
+<span class="hljs-built_in">console</span>.log( v.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
 
-<span class="hljs-keyword">const</span> v2 = v.toNormalScale()
+<span class="hljs-keyword">const</span> v2 = v.toCoinScale()
 
-<span class="hljs-built_in">console</span>.log( v2.scale ) <span class="hljs-comment">// BigValScale.NORMAL</span>
+<span class="hljs-built_in">console</span>.log( v2.scale ) <span class="hljs-comment">// &#x27;coins&#x27;</span>
 <span class="hljs-built_in">console</span>.log( v2.toString() ) <span class="hljs-comment">// &quot;1&quot;</span>
 
-<span class="hljs-keyword">const</span> v3 = v2.toSmallestScale()
+<span class="hljs-keyword">const</span> v3 = v2.tominScale()
 
-<span class="hljs-built_in">console</span>.log( v3.scale ) <span class="hljs-comment">// BigValScale.SMALLEST</span>
+<span class="hljs-built_in">console</span>.log( v3.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
 <span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;100&quot;</span></code></pre>
 			<a href="#number-scales" id="number-scales" style="color: inherit; text-decoration: none;">
 				<h2>Number scales</h2>
 			</a>
-			<p> At any given time a <code>BigVal</code> instance operates at a particular number <em>scale</em>. The scale is based on the the no. of <code>decimals</code> specified in the configuration (<code>BigValConfig</code>).</p>
-			<p> The <code>BigValScale.SMALLEST</code> scale is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The <code>BigValScale.NORMAL</code> scale is for numbers which implicitly have decimal places.</p>
-			<p> For example, if a given <code>BigVal</code> has <code>decimals = 2</code> then the following two numbers are equivalent in value:</p>
+			<p>At any given time a <code>BigVal</code> instance operates at a particular number <em>scale</em>. The scale is based on the the no. of <code>decimals</code> specified in the configuration (<code>BigValConfig</code>). By default the no. of <code>decimals</code> is 18.</p>
+			<p>The <code>min</code> scale (this is the default) is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The <code>coins</code> scale is for numbers which implicitly have decimal places.</p>
+			<p>For example, if a given <code>BigVal</code> has <code>decimals = 2</code> then the following two numbers are equivalent in value:</p>
 			<ul>
-				<li><code>BigValScale.SMALLEST</code>, value = <code>100</code></li>
-				<li><code>BigValScale.NORMAL</code>, value = <code>1</code></li>
+				<li>scale = <code>min</code>, value = <code>100</code></li>
+				<li>scale = <code>coins</code>, value = <code>1</code></li>
 			</ul>
 			<p>If <code>decimals = 18</code> (this is the default) then the following two numbers are equivalent in value:</p>
 			<ul>
-				<li><code>BigValScale.SMALLEST</code>, value = <code>1000000000000000000</code></li>
-				<li><code>BigValScale.NORMAL</code>, value = 1</li>
+				<li>scale = <code>min</code>, value = <code>1000000000000000000</code></li>
+				<li>scale = <code>coins</code>, value = <code>1</code></li>
 			</ul>
 			<p>The use of scales like this makes it easy to convert between chain-friendly and user-friendly values and perform arithmetic at the desired precision.</p>
 			<a href="#developer-guide" id="developer-guide" style="color: inherit; text-decoration: none;">
@@ -183,12 +180,6 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
-					<section class="tsd-index-section ">
-						<h3>Enumerations</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-enum"><a href="enums/bigvalscale.html" class="tsd-kind-icon">Big<wbr>Val<wbr>Scale</a></li>
-						</ul>
-					</section>
 					<section class="tsd-index-section ">
 						<h3>Classes</h3>
 						<ul class="tsd-index-list">
