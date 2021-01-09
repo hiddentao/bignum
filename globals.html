@@ -87,6 +87,24 @@
 <span class="hljs-keyword">const</span> v3 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;0xde0b6b3a7640000&#x27;</span>)
 <span class="hljs-keyword">const</span> v4 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;b1000000000000000000&#x27;</span>)
 <span class="hljs-keyword">const</span> v5 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">1000000000000000000</span>))</code></pre>
+			<p>Scaling:</p>
+			<pre><code class="language-js"><span class="hljs-keyword">const</span> v6 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">6</span>, <span class="hljs-string">&#x27;coins&#x27;</span>)
+<span class="hljs-keyword">const</span> sameAsV6 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;6000000000000000000&#x27;</span>, <span class="hljs-string">&#x27;min&#x27;</span>)
+<span class="hljs-keyword">const</span> sameAsV6Again = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;6000000000000000000&#x27;</span>)</code></pre>
+			<p>Scaling is based on no. of decimals:</p>
+			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;min&#x27;</span>, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> }) <span class="hljs-comment">// same as new BigVal(1, &#x27;coins&#x27;, { decimals: 2 })</span>
+
+<span class="hljs-built_in">console</span>.log( v.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
+
+<span class="hljs-keyword">const</span> v2 = v.toCoinScale()
+
+<span class="hljs-built_in">console</span>.log( v2.scale ) <span class="hljs-comment">// &#x27;coins&#x27;</span>
+<span class="hljs-built_in">console</span>.log( v2.toString() ) <span class="hljs-comment">// &quot;1&quot;</span>
+
+<span class="hljs-keyword">const</span> v3 = v2.tominScale()
+
+<span class="hljs-built_in">console</span>.log( v3.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
+<span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;100&quot;</span></code></pre>
 			<p>Simple arithmetic leaves original unchanged:</p>
 			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">1000000000000000000</span>)
 
@@ -129,20 +147,6 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 <span class="hljs-keyword">const</span> isGreater = v.gte(<span class="hljs-number">254</span>)
 
 <span class="hljs-built_in">console</span>.log( isGreater ) <span class="hljs-comment">// true</span></code></pre>
-			<p>Built-in scaling based on no. of decimals:</p>
-			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">100</span>, <span class="hljs-string">&#x27;min&#x27;</span>, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> }) <span class="hljs-comment">// same as new BigVal(1, &#x27;coins&#x27;, { decimals: 2 })</span>
-
-<span class="hljs-built_in">console</span>.log( v.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
-
-<span class="hljs-keyword">const</span> v2 = v.toCoinScale()
-
-<span class="hljs-built_in">console</span>.log( v2.scale ) <span class="hljs-comment">// &#x27;coins&#x27;</span>
-<span class="hljs-built_in">console</span>.log( v2.toString() ) <span class="hljs-comment">// &quot;1&quot;</span>
-
-<span class="hljs-keyword">const</span> v3 = v2.tominScale()
-
-<span class="hljs-built_in">console</span>.log( v3.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
-<span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;100&quot;</span></code></pre>
 			<a href="#number-scales" id="number-scales" style="color: inherit; text-decoration: none;">
 				<h2>Number scales</h2>
 			</a>
