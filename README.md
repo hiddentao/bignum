@@ -4,9 +4,9 @@
 
 # bigval
 
-Javascript library for representing arbitrarily large or small numbers with decimals. 
+Javascript library for representing arbitrarily large or small crypto values with decimals. 
 
-`bigval` is useful for handling extremely large numbers with precision, e.g. when performing arithmetic with cryptocurrency balances. \\
+`bigval` is useful for handling extremely large crypto numbers with precision, e.g. when performing arithmetic with balances.
 
 It is inspired by [ethval](https://github.com/hiddentao/ethval).
 
@@ -100,39 +100,39 @@ const isGreater = v.gte(254)
 console.log( isGreater ) // true
 ```
 
-Built-in scaling based no. of decimals:
+Built-in scaling based on no. of decimals:
 
 ```js
-const v = new BigVal(100, BigValScale.SMALLEST, { decimals: 2 })
+const v = new BigVal(100, 'min', { decimals: 2 }) // same as new BigVal(1, 'coins', { decimals: 2 })
 
-console.log( v.scale ) // BigValScale.SMALLEST
+console.log( v.scale ) // 'min'
 
-const v2 = v.toNormalScale()
+const v2 = v.toCoinScale()
 
-console.log( v2.scale ) // BigValScale.NORMAL
+console.log( v2.scale ) // 'coins'
 console.log( v2.toString() ) // "1"
 
-const v3 = v2.toSmallestScale()
+const v3 = v2.tominScale()
 
-console.log( v3.scale ) // BigValScale.SMALLEST
+console.log( v3.scale ) // 'min'
 console.log( v3.toString() ) // "100"
 ```
 
 ## Number scales
 
- At any given time a `BigVal` instance operates at a particular number _scale_. The scale is based on the the no. of `decimals` specified in the configuration (`BigValConfig`).
+At any given time a `BigVal` instance operates at a particular number _scale_. The scale is based on the the no. of `decimals` specified in the configuration (`BigValConfig`). By default the no. of `decimals` is 18.
  
- The `BigValScale.SMALLEST` scale is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The `BigValScale.NORMAL` scale is for numbers which implicitly have decimal places.
+The `min` scale (this is the default) is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The `coins` scale is for numbers which implicitly have decimal places.
  
- For example, if a given `BigVal` has `decimals = 2` then the following two numbers are equivalent in value:
+For example, if a given `BigVal` has `decimals = 2` then the following two numbers are equivalent in value:
  
- * `BigValScale.SMALLEST`, value = `100`
- * `BigValScale.NORMAL`, value = `1`
+ * scale = `min`, value = `100`
+ * scale = `coins`, value = `1`
 
 If `decimals = 18` (this is the default) then the following two numbers are equivalent in value:
 
-* `BigValScale.SMALLEST`, value = `1000000000000000000`
-* `BigValScale.NORMAL`, value = 1
+* scale = `min`, value = `1000000000000000000`
+* scale = `coins`, value = `1`
  
 The use of scales like this makes it easy to convert between chain-friendly and user-friendly values and perform arithmetic at the desired precision.
 

@@ -33,20 +33,24 @@ const toDecimalAtOriginalScale = (input: any, reference: BigVal): Decimal => (
   input._n ? input.toScale(reference.scale)._n : toDecimal(input)
 )
 
+
 /**
- * The scale of a `BigVal` instance.
- * 
- * For example, if the no. of `decimals` in the `BigValConfig` is set to `2` then a value of `1` at `NORMAL` scale = `1` and at `SMALLEST` scale = `100`.
+ * Number scales.
+ * @internal
  */
-export enum BigValScale {
-  /**
-   * Smallest scale at which to represent values.
-   */
-  SMALLEST = 0,
-  /**
-   * Normal scale at which to represent values.
-   */
-  NORMAL = 1,
+const SCALE: Record<string, string> = {
+  coins: 'coins',
+  min: 'min',
+}
+
+/**
+ * Check that given scale is valid.
+ * @internal
+ */
+const assertValidScale = (s: string) => {
+  if (!SCALE[s]) {
+    throw new Error(`Invalid scale: ${s}`)
+  }
 }
 
 
@@ -65,24 +69,23 @@ export interface BigValConfig {
 /**
  * Represents an arbitrarily large or small number with decimals.
  * 
- * At any given time a `BigVal` instance operates at a particular number _scale_. The scale is based on the 
- * the no. of `decimals` specified in the configuration (`BigValConfig`). The `BigValScale.SMALLEST` scale 
- * is for numbers which do not have decimal places since they are already denominated in the smallest 
- * possible unit. The `BigValScale.NORMAL` scale is for numbers which implicitly have decimal places.
+ * All the arithmetic methods are immutable, i.e. they return a new `BigVal` instance, leaving the original inputs unchanged.
+ *
+ * At any given time a `BigVal` instance operates at a particular number _scale_. The scale is based on the the no. of `decimals` specified in the configuration (`BigValConfig`).
+ * 
+ * The `min` scale is for numbers which do not have decimal places since they are already denominated in the smallest possible unit. The `coins` scale is for numbers which implicitly have decimal places.
  * 
  * For example, if a given `BigVal` has `decimals = 2` then the following two numbers are equivalent in value:
  * 
- * - `BigValScale.SMALLEST`, value = `100`
- * - `BigValScale.NORMAL`, value = `1`
+ * * scale = `min`, value = `100`
+ * * scale = `coins`, value = `1`
  * 
  * If `decimals = 18` (this is the default) then the following two numbers are equivalent in value:
  * 
- * - `BigValScale.SMALLEST`, value = `1000000000000000000`
- * - `BigValScale.NORMAL`, value = 1
+ * * scale = `min`, value = `1000000000000000000`
+ * * scale = `coins`, value = 1
  * 
  * The use of scales like this makes it easy to convert between chain-friendly and user-friendly values and perform arithmetic at the desired precision.
- * 
- * All the arithmetic methods are immutable, i.e. they return a new `BigVal` instance, leaving the original inputs unchanged.
  */
 export class BigVal {
   /**
@@ -92,7 +95,7 @@ export class BigVal {
   /**
    * @internal
    */
-  _scale: BigValScale
+  _scale: string
   /**
    * @internal
    */
@@ -137,16 +140,17 @@ export class BigVal {
   /**
    * @constructor
    * @param src Input number. If this is a `BigVal` instance then `scale` and `config` parameters will be ignored.
-   * @param scale The scale of the input number.
+   * @param scale The scale of the input number. Default is `min`.
    * @param config Custom configuration for this instance.
    */
-  constructor(src: any, scale: BigValScale = BigValScale.SMALLEST, config: BigValConfig = { decimals: 18 }) {
+  constructor(src: any, scale: string = 'min', config: BigValConfig = { decimals: 18 }) {
     if (src instanceof BigVal) {
       this._n = toDecimal(src._n)
       this._scale = src.scale
       this._config = src.config
     } else {
       this._n = toDecimal(src)
+      assertValidScale(scale)
       this._scale = scale
       this._config = config
     }
@@ -167,7 +171,7 @@ export class BigVal {
   /**
    * Get current scale.
    */
-  get scale(): BigValScale {
+  get scale(): string {
     return this._scale
   }
 
@@ -202,14 +206,14 @@ export class BigVal {
   }
 
   /**
-   * Convert to smallest scale.
+   * Convert to 'min' scale.
    */
-  toSmallestScale(): BigVal {
-    if (this._scale === BigValScale.SMALLEST) {
+  tominScale(): BigVal {
+    if (this._scale === SCALE.min) {
       return this
     } else {
       const n = this.scaleDown(this._config.decimals)
-      n._scale = BigValScale.SMALLEST
+      n._scale = SCALE.coins
       return n
     }
   }
@@ -217,12 +221,12 @@ export class BigVal {
   /**
    * Convert to normal scale.
    */
-  toNormalScale(): BigVal {
-    if (this._scale === BigValScale.NORMAL) {
+  toCoinsScale(): BigVal {
+    if (this._scale === SCALE.coins) {
       return this
     } else {
       const n = this.scaleUp(this._config.decimals)
-      n._scale = BigValScale.NORMAL
+      n._scale = SCALE.coins
       return n
     }
   }
@@ -232,12 +236,14 @@ export class BigVal {
    * 
    * @param scale Scale to convert to.
    */
-  toScale(scale: BigValScale): BigVal {
+  toScale(scale: string): BigVal {
+    assertValidScale(scale)
+
     switch (scale) {
-      case BigValScale.SMALLEST:
-        return this.toSmallestScale()
-      case BigValScale.NORMAL:
-        return this.toNormalScale()
+      case SCALE.min:
+        return this.tominScale()
+      case SCALE.coins:
+        return this.toCoinsScale()
       default:
         throw new Error(`Unrecognized scale: ${scale}`)
     }
