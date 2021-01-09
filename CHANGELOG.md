@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/erdDEVcode/bigval/compare/v1.1.0...v1.1.1) (2021-01-09)
+
+
+### Bug Fixes
+
+* method name ([824cebd](https://github.com/erdDEVcode/bigval/commit/824cebd9a259a515ef536c7c34ee91aae04ac501))
+
 # [1.1.0](https://github.com/erdDEVcode/bigval/compare/v1.0.2...v1.1.0) (2021-01-09)
 
 ## [1.0.2](https://github.com/erdDEVcode/bigval/compare/v1.0.1...v1.0.2) (2021-01-08)
