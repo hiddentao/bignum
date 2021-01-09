@@ -37,6 +37,32 @@ const v4 = new BigVal('b1000000000000000000')
 const v5 = new BigVal(new BigVal(1000000000000000000))
 ```
 
+Scaling:
+
+```js
+const v6 = new BigVal(6, 'coins')
+const sameAsV6 = new BigVal('6000000000000000000', 'min')
+const sameAsV6Again = new BigVal('6000000000000000000')
+```
+
+Scaling is based on no. of decimals:
+
+```js
+const v = new BigVal(100, 'min', { decimals: 2 }) // same as new BigVal(1, 'coins', { decimals: 2 })
+
+console.log( v.scale ) // 'min'
+
+const v2 = v.toCoinScale()
+
+console.log( v2.scale ) // 'coins'
+console.log( v2.toString() ) // "1"
+
+const v3 = v2.tominScale()
+
+console.log( v3.scale ) // 'min'
+console.log( v3.toString() ) // "100"
+```
+
 Simple arithmetic leaves original unchanged:
 
 ```js
@@ -98,24 +124,6 @@ const v = new BigVal(255)
 const isGreater = v.gte(254)
 
 console.log( isGreater ) // true
-```
-
-Built-in scaling based on no. of decimals:
-
-```js
-const v = new BigVal(100, 'min', { decimals: 2 }) // same as new BigVal(1, 'coins', { decimals: 2 })
-
-console.log( v.scale ) // 'min'
-
-const v2 = v.toCoinScale()
-
-console.log( v2.scale ) // 'coins'
-console.log( v2.toString() ) // "1"
-
-const v3 = v2.tominScale()
-
-console.log( v3.scale ) // 'min'
-console.log( v3.toString() ) // "100"
 ```
 
 ## Number scales
