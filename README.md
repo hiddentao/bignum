@@ -159,6 +159,12 @@ To re-build the CommonJS output on chnage:
 yarn dev
 ```
 
+To test:
+
+```shell
+yarn test
+```
+
 To build the docs:
 
 ```shell

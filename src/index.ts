@@ -22,16 +22,6 @@ const toDecimal = (a: any): Decimal => {
   return new PreciseDecimal(`${a}`)
 }
 
-/**
- * Convert input to `PreciseDecimal` instance based on the scale given in the reference value. 
- * 
- * @param input Input value.
- * @param reference Reference value.
- * @internal
- */
-const toDecimalAtOriginalScale = (input: any, reference: BigVal): Decimal => (
-  input._n ? input.toScale(reference.scale)._n : toDecimal(input)
-)
 
 
 /**
@@ -157,15 +147,15 @@ export class BigVal {
 
     ;['mul', 'sub', 'div', 'add'].forEach(method => {
       (this as any)[method] = (v: any) => (
-        new BigVal((this._n as any)[method].call(this._n, toDecimalAtOriginalScale(v, this)), this._scale, this._config)
+        new BigVal((this._n as any)[method].call(this._n, toDecimal(v)), this._scale, this._config)
       )
     })
 
-      ;['gt', 'gte', 'lt', 'lte', 'eq'].forEach(method => {
-        (this as any)[method] = (v: any) => (
-          (this._n as any)[method].call(this._n, toDecimalAtOriginalScale(v, this))
-        )
-      })
+    ;['gt', 'gte', 'lt', 'lte', 'eq'].forEach(method => {
+      (this as any)[method] = (v: any) => (
+        (this._n as any)[method].call(this._n, toDecimal(v))
+      )
+    })
   }
 
   /**
@@ -183,22 +173,6 @@ export class BigVal {
   }
 
   /**
-   * Multiply by the given power of 10.
-   * @param v The power of 10.
-   */
-  scaleDown(v: any): BigVal {
-    return this.mul(toDecimal(10).pow(toDecimal(v)))
-  }
-
-  /**
-   * Divide by the given power of 10.
-   * @param v The power of 10.
-   */
-  scaleUp(v: any): BigVal {
-    return this.div(toDecimal(10).pow(toDecimal(v)))
-  }
-
-  /**
    * Round to the nearest whole number.
    */
   round(): BigVal {
@@ -210,10 +184,10 @@ export class BigVal {
    */
   toMinScale(): BigVal {
     if (this._scale === SCALE.min) {
-      return this
+      return new BigVal(this)
     } else {
-      const n = this.scaleDown(this._config.decimals)
-      n._scale = SCALE.coins
+      const n = this.mul(toDecimal(10).pow(toDecimal(this._config.decimals)))
+      n._scale = SCALE.min
       return n
     }
   }
@@ -223,9 +197,9 @@ export class BigVal {
    */
   toCoinsScale(): BigVal {
     if (this._scale === SCALE.coins) {
-      return this
+      return new BigVal(this)
     } else {
-      const n = this.scaleUp(this._config.decimals)
+      const n = this.div(toDecimal(10).pow(toDecimal(this._config.decimals)))
       n._scale = SCALE.coins
       return n
     }
