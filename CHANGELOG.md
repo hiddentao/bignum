@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/erdDEVcode/bigval/compare/v1.3.0...v1.3.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* isBigVal should not panic for empty values ([a49739b](https://github.com/erdDEVcode/bigval/commit/a49739b60a5a36890bd2a611551c591d205e8b65))
+
 # [1.3.0](https://github.com/erdDEVcode/bigval/compare/v1.2.0...v1.3.0) (2021-01-14)
 
 
