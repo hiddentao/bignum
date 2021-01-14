@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/erdDEVcode/bigval/compare/v1.2.0...v1.3.0) (2021-01-14)
+
+
+### Features
+
+* isBigVal() check ([70ad610](https://github.com/erdDEVcode/bigval/commit/70ad610b17890d384a2c6d2bdc58b68274e0ef23))
+
 # [1.2.0](https://github.com/erdDEVcode/bigval/compare/v1.1.2...v1.2.0) (2021-01-11)
 
 
