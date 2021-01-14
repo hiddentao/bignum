@@ -55,6 +55,14 @@ export interface BigValConfig {
 }
 
 
+/**
+ * Get whether given value is a `BigVal` instance.
+ * @param v A value.
+ */
+export const isBigVal = (v: any): boolean => {
+  return (v._n && v.scale && v.toString && v.toMinScale)
+}
+
 
 /**
  * Represents an arbitrarily large or small number with decimals.
@@ -134,7 +142,7 @@ export class BigVal {
    * @param config Custom configuration for this instance.
    */
   constructor(src: any, scale: string = 'min', config: BigValConfig = { decimals: 18 }) {
-    if (src instanceof BigVal) {
+    if (isBigVal(src)) {
       this._n = toDecimal(src._n)
       this._scale = src.scale
       this._config = src.config
