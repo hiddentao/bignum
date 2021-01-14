@@ -1,6 +1,7 @@
-import { BigVal } from '../'
+import { BigVal, isBigVal } from '../'
 
-require('./utils')
+const { expect} = require('./utils')
+
 
 describe('constructor', () => {
   it('number', () => {
@@ -207,4 +208,19 @@ describe('arithmetic', () => {
     a.mul(v).toString().should.equal('1960')
     a.div(v).toString(3).should.equal('4.9')
   })
+})
+
+
+describe('isBigVal()', () => {
+  it('works', () => {
+    expect(isBigVal(0)).to.be.false
+    expect(isBigVal('100')).to.be.false
+    expect(isBigVal({
+      toString: () => {}
+    })).to.be.false
+    expect(isBigVal(undefined)).to.be.false
+    expect(isBigVal(null)).to.be.false
+    expect(isBigVal(new BigVal(1))).to.be.true
+  })
+
 })

@@ -60,7 +60,7 @@ export interface BigValConfig {
  * @param v A value.
  */
 export const isBigVal = (v: any): boolean => {
-  return (v._n && v.scale && v.toString && v.toMinScale)
+  return !!(v && v._n && v.scale && v.toString && v.toMinScale)
 }
 
 
