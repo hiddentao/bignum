@@ -103,9 +103,9 @@ describe('scaling + decimals', () => {
   it('scale up/down', () => {
     const a = new BigVal('123.4', 'coins', { decimals: 2 });
 
-    a.toCoinsScale().should.not.equal(a) // immutable
-    a.toCoinsScale().toString().should.equal('123.4')
-    a.toCoinsScale().scale.should.equal('coins')
+    a.toCoinScale().should.not.equal(a) // immutable
+    a.toCoinScale().toString().should.equal('123.4')
+    a.toCoinScale().scale.should.equal('coins')
 
     a.toScale('coins').should.not.equal(a) // immutable
     a.toScale('coins').toString().should.equal('123.4')
@@ -119,8 +119,8 @@ describe('scaling + decimals', () => {
     a.toScale('min').toString().should.equal('12340')
     a.toScale('min').scale.should.equal('min')
 
-    a.toMinScale().toCoinsScale().toString().should.equal('123.4')
-    a.toMinScale().toCoinsScale().scale.should.equal('coins')
+    a.toMinScale().toCoinScale().toString().should.equal('123.4')
+    a.toMinScale().toCoinScale().scale.should.equal('coins')
   })
 })
 

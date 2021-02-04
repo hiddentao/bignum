@@ -203,7 +203,7 @@ export class BigVal {
   /**
    * Convert to 'coins' scale.
    */
-  toCoinsScale(): BigVal {
+  toCoinScale(): BigVal {
     if (this._scale === SCALE.coins) {
       return new BigVal(this)
     } else {
@@ -225,7 +225,7 @@ export class BigVal {
       case SCALE.min:
         return this.toMinScale()
       case SCALE.coins:
-        return this.toCoinsScale()
+        return this.toCoinScale()
       default:
         throw new Error(`Unrecognized scale: ${scale}`)
     }
