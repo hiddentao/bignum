@@ -100,6 +100,60 @@ describe('scaling + decimals', () => {
     b.scale.should.equal(a.scale)
   })
 
+  describe('static: from()', () => {
+    it('construction basics', () => {
+      const a = (BigVal.from('123.4', 'coins'));
+      a.toString().should.equal('123.4');
+      a.scale.should.equal('coins');
+      a.config.should.deep.equal({ decimals: 18 });
+
+      const b = (BigVal.from('123.4', 'min'))
+      b.toString().should.equal('123.4');
+      b.scale.should.equal('min');
+      b.config.should.deep.equal({ decimals: 18 });
+
+      const c = (BigVal.from('123.4', 'min'))
+      c.toString().should.equal('123.4');
+      c.scale.should.equal('min');
+      c.config.should.deep.equal({ decimals: 18 });
+
+      const d = (BigVal.from('123.4', 'min', { decimals: 2 }));
+      d.toString().should.equal('123.4');
+      d.scale.should.equal('min');
+      d.config.should.deep.equal({ decimals: 2 });
+    })
+
+    it('constructing from existing BigVal copies source scale', () => {
+      const a = new BigVal(1, 'coins')
+      const b = BigVal.from(a)
+      b.scale.should.equal(a.scale)
+    })
+  })
+
+  describe('static: fromStr()', () => {
+    it('construction basics', () => {
+      const a = (BigVal.fromStr('123.4 coins'));
+      a.toString().should.equal('123.4');
+      a.scale.should.equal('coins');
+      a.config.should.deep.equal({ decimals: 18 });
+
+      const b = (BigVal.fromStr('123.4 min'))
+      b.toString().should.equal('123.4');
+      b.scale.should.equal('min');
+      b.config.should.deep.equal({ decimals: 18 });
+
+      const c = (BigVal.fromStr('123.4 min'))
+      c.toString().should.equal('123.4');
+      c.scale.should.equal('min');
+      c.config.should.deep.equal({ decimals: 18 });
+
+      const d = (BigVal.fromStr('123.4 min', { decimals: 2 }));
+      d.toString().should.equal('123.4');
+      d.scale.should.equal('min');
+      d.config.should.deep.equal({ decimals: 2 });
+    })
+  })
+
   it('scale up/down', () => {
     const a = new BigVal('123.4', 'coins', { decimals: 2 });
 

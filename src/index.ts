@@ -54,6 +54,11 @@ export interface BigValConfig {
   decimals?: number
 }
 
+/**
+ * Default config for `BigVal`.
+ */
+export const DefaultBigValConfig: BigValConfig = { decimals: 18 }
+
 
 /**
  * Get whether given value is a `BigVal` instance.
@@ -141,7 +146,7 @@ export class BigVal {
    * @param scale The scale of the input number. Default is `min`.
    * @param config Custom configuration for this instance.
    */
-  constructor(src: any, scale: string = 'min', config: BigValConfig = { decimals: 18 }) {
+  constructor(src: any, scale: string = 'min', config: BigValConfig = DefaultBigValConfig) {
     if (isBigVal(src)) {
       this._n = toDecimal(src._n)
       this._scale = src.scale
@@ -164,6 +169,30 @@ export class BigVal {
         (this._n as any)[method].call(this._n, toDecimal(v))
       )
     })
+  }
+
+  /**
+   * Construct a `BigVal` instance.
+   * 
+   * @param src Input number. If this is a `BigVal` instance then `scale` and `config` parameters will be ignored.
+   * @param scale The scale of the input number. Default is `min`.
+   * @param config Custom configuration for this instance.
+   * @returns `BigVal` instance.
+   */
+  static from(src: any, scale: string = 'min', config: BigValConfig = DefaultBigValConfig): BigVal {
+    return new BigVal(src, scale, config)
+  }
+
+  /**
+   * Construct a `BigVal` instance.
+   * 
+   * @param numScale String in form: `<number> <scale>`. If scale ommitted then `min` is assumed.
+   * @param config Custom configuration for this instance.
+   * @returns `BigVal` instance.
+   */
+  static fromStr(numScale: string, config: BigValConfig = DefaultBigValConfig): BigVal {
+    const t = numScale.split(' ')
+    return this.from(t[0], t[1], config)
   }
 
   /**
@@ -265,4 +294,22 @@ export class BigVal {
   toNumber() {
     return this._n.toNumber()
   }
+}
+
+
+/**
+ * Get string representation of a `BigVal` in min scale.
+ * 
+ * @param v Input string 
+ * @param config 
+ * @returns 
+ */
+export const minStr = (v: string, config: BigValConfig = DefaultBigValConfig): string => {
+  const t = v.trim().split(' ')
+  
+  if (t.length === 1) {
+    t.push('min')
+  }
+
+  return new BigVal(t[0], t[1], config).toMinScale().toString()
 }

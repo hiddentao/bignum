@@ -37,6 +37,7 @@ const v4 = new BigVal('b1000000000000000000')
 const v5 = new BigVal(new BigVal(1000000000000000000))
 ```
 
+
 Scaling:
 
 ```js
@@ -57,7 +58,7 @@ const v2 = v.toCoinScale()
 console.log( v2.scale ) // 'coins'
 console.log( v2.toString() ) // "1"
 
-const v3 = v2.tominScale()
+const v3 = v2.toMinScale()
 
 console.log( v3.scale ) // 'min'
 console.log( v3.toString() ) // "100"
@@ -75,6 +76,24 @@ console.log(v2 !== v) // true
 console.log(v2.toString()) // "1000000000000000032"
 
 console.log(v.toString()) // "1000000000000000000" - original unchanged
+```
+
+Initializing using `from()` static convenience method:
+
+```js
+const v6 = BigVal::from('1', 'coins', { decimals: 2 })
+const v6_1 = v6.toMinScale()
+
+console.log( v6_1.scale ) // 'min'
+console.log( v6_1.toString() ) // "100"
+```
+
+Initializing using `fromStr()` static method:
+
+```js
+const v7 = BigVal::fromStr('2 coins') // same as BigVal::from(2, 'coins')
+const v8 = BigVal::fromStr('0.5 min') // same as BigVal::from(0.5, 'min')
+const v9 = BigVal::fromStr('0xff', { decimals: 2 }) // same as BigVal::from(0xff, undefined, { decimals: 2 })
 ```
 
 Output in different types:
