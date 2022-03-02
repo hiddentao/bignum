@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/hiddentao/bigval/compare/v1.4.0...v1.5.0) (2022-03-02)
+
+
+### Features
+
+* add static construction methods ([c8bb453](https://github.com/hiddentao/bigval/commit/c8bb45396256200241e37c62ec7219ace1ea1cdb))
+* add toMinStr() convenience method ([704e87e](https://github.com/hiddentao/bigval/commit/704e87e1836358dbd3600762e55714e5b0238058))
+
 # [1.4.0](https://github.com/erdDEVcode/bigval/compare/v1.3.1...v1.4.0) (2021-02-04)
 
 ## [1.3.1](https://github.com/erdDEVcode/bigval/compare/v1.3.0...v1.3.1) (2021-01-14)
