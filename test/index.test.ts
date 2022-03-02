@@ -1,4 +1,4 @@
-import { BigVal, isBigVal } from '../'
+import { BigVal, isBigVal, toMinStr } from '../'
 
 const { expect} = require('./utils')
 
@@ -276,5 +276,15 @@ describe('isBigVal()', () => {
     expect(isBigVal(null)).to.be.false
     expect(isBigVal(new BigVal(1))).to.be.true
   })
+})
 
+
+describe('toMinStr()', () => {
+  it('works', () => {
+    expect(toMinStr('0')).to.eq('0')
+    expect(toMinStr('100')).to.eq('100')
+    expect(toMinStr('100 min')).to.eq('100')
+    expect(toMinStr('1 coins')).to.eq('1000000000000000000')
+    expect(toMinStr('1 coins', { decimals: 2 })).to.eq('100')
+  })
 })

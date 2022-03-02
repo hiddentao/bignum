@@ -298,18 +298,14 @@ export class BigVal {
 
 
 /**
- * Get string representation of a `BigVal` in min scale.
+ * Get string representation of a `BigVal` in `min` scale.
  * 
- * @param v Input string 
- * @param config 
- * @returns 
+ * This internally calls `BigVal.fromStr(numScale, config).toMinScale().toString()`.
+ * 
+ * @param numScale String in form: `<number> <scale>`. If scale ommitted then `min` is assumed.
+ * @param config Custom configuration for this instance.
+ * @returns string
  */
-export const minStr = (v: string, config: BigValConfig = DefaultBigValConfig): string => {
-  const t = v.trim().split(' ')
-  
-  if (t.length === 1) {
-    t.push('min')
-  }
-
-  return new BigVal(t[0], t[1], config).toMinScale().toString()
+export const toMinStr = (numScale: string, config: BigValConfig = DefaultBigValConfig): string => {
+  return BigVal.fromStr(numScale, config).toMinScale().toString()
 }
