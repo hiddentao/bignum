@@ -54,6 +54,12 @@
 		<li class=" tsd-kind-function">
 			<a href="globals.html#isbigval" class="tsd-kind-icon">is<wbr>Big<wbr>Val</a>
 		</li>
+		<li class=" tsd-kind-function">
+			<a href="globals.html#tominstr" class="tsd-kind-icon">to<wbr>Min<wbr>Str</a>
+		</li>
+		<li class=" tsd-kind-object-literal">
+			<a href="globals.html#defaultbigvalconfig" class="tsd-kind-icon">Default<wbr>Big<wbr>Val<wbr>Config</a>
+		</li>
 	</ul>
 </nav>
 <div class="container container-main">
@@ -104,7 +110,7 @@
 <span class="hljs-built_in">console</span>.log( v2.scale ) <span class="hljs-comment">// &#x27;coins&#x27;</span>
 <span class="hljs-built_in">console</span>.log( v2.toString() ) <span class="hljs-comment">// &quot;1&quot;</span>
 
-<span class="hljs-keyword">const</span> v3 = v2.tominScale()
+<span class="hljs-keyword">const</span> v3 = v2.toMinScale()
 
 <span class="hljs-built_in">console</span>.log( v3.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
 <span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;100&quot;</span></code></pre>
@@ -118,6 +124,16 @@
 <span class="hljs-built_in">console</span>.log(v2.toString()) <span class="hljs-comment">// &quot;1000000000000000032&quot;</span>
 
 <span class="hljs-built_in">console</span>.log(v.toString()) <span class="hljs-comment">// &quot;1000000000000000000&quot; - original unchanged</span></code></pre>
+			<p>Initializing using <code>from()</code> static convenience method:</p>
+			<pre><code class="language-js"><span class="hljs-keyword">const</span> v6 = BigVal::<span class="hljs-keyword">from</span>(<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;coins&#x27;</span>, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> })
+<span class="hljs-keyword">const</span> v6_1 = v6.toMinScale()
+
+<span class="hljs-built_in">console</span>.log( v6_1.scale ) <span class="hljs-comment">// &#x27;min&#x27;</span>
+<span class="hljs-built_in">console</span>.log( v6_1.toString() ) <span class="hljs-comment">// &quot;100&quot;</span></code></pre>
+			<p>Initializing using <code>fromStr()</code> static method:</p>
+			<pre><code class="language-js"><span class="hljs-keyword">const</span> v7 = BigVal::fromStr(<span class="hljs-string">&#x27;2 coins&#x27;</span>) <span class="hljs-comment">// same as BigVal::from(2, &#x27;coins&#x27;)</span>
+<span class="hljs-keyword">const</span> v8 = BigVal::fromStr(<span class="hljs-string">&#x27;0.5 min&#x27;</span>) <span class="hljs-comment">// same as BigVal::from(0.5, &#x27;min&#x27;)</span>
+<span class="hljs-keyword">const</span> v9 = BigVal::fromStr(<span class="hljs-string">&#x27;0xff&#x27;</span>, { <span class="hljs-attr">decimals</span>: <span class="hljs-number">2</span> }) <span class="hljs-comment">// same as BigVal::from(0xff, undefined, { decimals: 2 })</span></code></pre>
 			<p>Output in different types:</p>
 			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">255</span>)
 
@@ -204,6 +220,13 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-function"><a href="globals.html#isbigval" class="tsd-kind-icon">is<wbr>Big<wbr>Val</a></li>
+							<li class="tsd-kind-function"><a href="globals.html#tominstr" class="tsd-kind-icon">to<wbr>Min<wbr>Str</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Object literals</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-object-literal"><a href="globals.html#defaultbigvalconfig" class="tsd-kind-icon">Default<wbr>Big<wbr>Val<wbr>Config</a></li>
 						</ul>
 					</section>
 				</div>
@@ -221,7 +244,7 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/erdDEVcode/bigval/blob/af4ad97/src/index.ts#L62">index.ts:62</a></li>
+								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/d6647bc/src/index.ts#L67">index.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -244,6 +267,77 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="tominstr" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> to<wbr>Min<wbr>Str</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Min<wbr>Str<span class="tsd-signature-symbol">(</span>numScale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">?: </span><a href="interfaces/bigvalconfig.html" class="tsd-signature-type">BigValConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/d6647bc/src/index.ts#L309">index.ts:309</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get string representation of a <code>BigVal</code> in <code>min</code> scale.</p>
+							</div>
+							<p>This internally calls <code>BigVal.fromStr(numScale, config).toMinScale().toString()</code>.</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>numScale: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>String in form: <code>&lt;number&gt; &lt;scale&gt;</code>. If scale ommitted then <code>min</code> is assumed.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> config: <a href="interfaces/bigvalconfig.html" class="tsd-signature-type">BigValConfig</a><span class="tsd-signature-symbol"> = DefaultBigValConfig</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Custom configuration for this instance.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>string</p>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Object literals</h2>
+			<section class="tsd-panel tsd-member tsd-kind-object-literal">
+				<a name="defaultbigvalconfig" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> Default<wbr>Big<wbr>Val<wbr>Config</h3>
+				<div class="tsd-signature tsd-kind-icon">Default<wbr>Big<wbr>Val<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/d6647bc/src/index.ts#L60">index.ts:60</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Default config for <code>BigVal</code>.</p>
+					</div>
+				</div>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+					<a name="defaultbigvalconfig.decimals" class="tsd-anchor"></a>
+					<h3>decimals</h3>
+					<div class="tsd-signature tsd-kind-icon">decimals<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 18</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/d6647bc/src/index.ts#L60">index.ts:60</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 		</section>
 		<footer class="with-border-bottom">
 			<div class="container">
@@ -256,6 +350,9 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					</ul>
 					<ul class="tsd-legend">
 						<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+					</ul>
+					<ul class="tsd-legend">
+						<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 					</ul>
 				</div>
 			</div>
