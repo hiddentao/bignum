@@ -210,9 +210,9 @@ export class BigVal {
   }
 
   /**
-   * Get no. of decimal places.
+   * Get no. of decimal places in the curent value.
    */
-  get decimals(): number {
+  get decimalCount(): number {
     return this._n.decimalPlaces()
   }
 

@@ -32,9 +32,10 @@ const { BigVal } = require('bigval')
 
 const v1 = new BigVal(1000000000000000000)
 const v2 = new BigVal('1000000000000000000')
-const v3 = new BigVal('0xde0b6b3a7640000')
-const v4 = new BigVal('b1000000000000000000')
-const v5 = new BigVal(new BigVal(1000000000000000000))
+const v3 = new BigVal('0.00000001')
+const v4 = new BigVal('0xde0b6b3a7640000')
+const v5 = new BigVal('b1000000000000000000')
+const v6 = new BigVal(new BigVal(1000000000000000000))
 ```
 
 
