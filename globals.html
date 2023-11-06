@@ -93,9 +93,10 @@
 
 <span class="hljs-keyword">const</span> v1 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">1000000000000000000</span>)
 <span class="hljs-keyword">const</span> v2 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;1000000000000000000&#x27;</span>)
-<span class="hljs-keyword">const</span> v3 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;0xde0b6b3a7640000&#x27;</span>)
-<span class="hljs-keyword">const</span> v4 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;b1000000000000000000&#x27;</span>)
-<span class="hljs-keyword">const</span> v5 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">1000000000000000000</span>))</code></pre>
+<span class="hljs-keyword">const</span> v3 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;0.00000001&#x27;</span>)
+<span class="hljs-keyword">const</span> v4 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;0xde0b6b3a7640000&#x27;</span>)
+<span class="hljs-keyword">const</span> v5 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;b1000000000000000000&#x27;</span>)
+<span class="hljs-keyword">const</span> v6 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">1000000000000000000</span>))</code></pre>
 			<p>Scaling:</p>
 			<pre><code class="language-js"><span class="hljs-keyword">const</span> v6 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">6</span>, <span class="hljs-string">&#x27;coins&#x27;</span>)
 <span class="hljs-keyword">const</span> sameAsV6 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-string">&#x27;6000000000000000000&#x27;</span>, <span class="hljs-string">&#x27;min&#x27;</span>)
@@ -152,7 +153,10 @@
 
 <span class="hljs-keyword">const</span> v3 = v2.round()
 
-<span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;33&quot;</span></code></pre>
+<span class="hljs-built_in">console</span>.log( v3.toString() ) <span class="hljs-comment">// &quot;33&quot;</span>
+
+<span class="hljs-keyword">const</span> v4 = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">0.00000001</span>)
+<span class="hljs-built_in">console</span>.log(v4.decimalCount) <span class="hljs-comment">// 8</span></code></pre>
 			<p>Flexible input types:</p>
 			<pre><code class="language-js"><span class="hljs-keyword">const</span> v = <span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">255</span>)
 
@@ -244,7 +248,7 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/03388ba/src/index.ts#L67">index.ts:67</a></li>
+								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/4c1728d/src/index.ts#L67">index.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -277,7 +281,7 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/03388ba/src/index.ts#L316">index.ts:316</a></li>
+								<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/4c1728d/src/index.ts#L316">index.ts:316</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -319,7 +323,7 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 				<div class="tsd-signature tsd-kind-icon">Default<wbr>Big<wbr>Val<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/03388ba/src/index.ts#L60">index.ts:60</a></li>
+						<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/4c1728d/src/index.ts#L60">index.ts:60</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -333,7 +337,7 @@ v.add(<span class="hljs-keyword">new</span> BigVal(<span class="hljs-number">32<
 					<div class="tsd-signature tsd-kind-icon">decimals<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 18</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/03388ba/src/index.ts#L60">index.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/hiddentao/bigval/blob/4c1728d/src/index.ts#L60">index.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
