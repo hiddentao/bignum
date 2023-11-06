@@ -122,6 +122,9 @@ console.log( v2.toFixed(1) ) // "33.3"
 const v3 = v2.round()
 
 console.log( v3.toString() ) // "33"
+
+const v4 = new BigVal(0.00000001)
+console.log(v4.decimalCount) // 8
 ```
 
 

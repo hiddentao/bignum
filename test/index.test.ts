@@ -73,31 +73,31 @@ describe('output formats', () => {
 
 describe('scaling + decimals', () => {
   it('construction basics', () => {
-    const a = (new BigVal('123.4', 'coins'));
-    a.toString().should.equal('123.4');
-    a.scale.should.equal('coins');
+    const a = new BigVal("123.4", "coins");
+    a.toString().should.equal("123.4");
+    a.scale.should.equal("coins");
     a.config.should.deep.equal({ decimals: 18 });
     a.decimalCount.should.equal(1);
 
-    const b = (new BigVal('123.4', 'min'))
-    b.toString().should.equal('123.4');
-    b.scale.should.equal('min');
+    const b = new BigVal("123.4", "min");
+    b.toString().should.equal("123.4");
+    b.scale.should.equal("min");
     b.config.should.deep.equal({ decimals: 18 });
     b.decimalCount.should.equal(1);
 
-    const c = (new BigVal('123.4', 'min'))
-    c.toString().should.equal('123.4');
-    c.scale.should.equal('min');
+    const c = new BigVal("123.4", "min");
+    c.toString().should.equal("123.4");
+    c.scale.should.equal("min");
     c.config.should.deep.equal({ decimals: 18 });
     c.decimalCount.should.equal(1);
 
-    const d = (new BigVal('123.4', 'min', { decimals: 2 }));
-    d.toString().should.equal('123.4');
-    d.scale.should.equal('min');
+    const d = new BigVal("123.4", "min", { decimals: 2 });
+    d.toString().should.equal("123.4");
+    d.scale.should.equal("min");
     d.config.should.deep.equal({ decimals: 2 });
     d.decimalCount.should.equal(1);
 
-    const e = (new BigVal('0.00000001', 'coins', { decimals: 8 }));
+    const e = new BigVal("0.00000001", "coins", { decimals: 8 });
     e.toString().should.equal("1e-8");
     e.scale.should.equal("coins");
     e.config.should.deep.equal({ decimals: 8 });
