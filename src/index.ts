@@ -210,6 +210,13 @@ export class BigVal {
   }
 
   /**
+   * Get no. of decimal places.
+   */
+  get decimals(): number {
+    return this._n.decimalPlaces()
+  }
+
+  /**
    * Round to the nearest whole number.
    */
   round(): BigVal {
