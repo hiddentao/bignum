@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/hiddentao/bigval/compare/v1.5.0...v1.6.0) (2023-11-06)
+
+
+### Features
+
+* add decimals getter ([9b3fbb0](https://github.com/hiddentao/bigval/commit/9b3fbb06d0fe9346437a37ced08a92899cc6ec96))
+
 # [1.5.0](https://github.com/hiddentao/bigval/compare/v1.4.0...v1.5.0) (2022-03-02)
 
 
