@@ -1,6 +1,6 @@
 {
   "name": "bigval",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Easier calculation and formatting of crypto values with decimals. Useful for smart contract interaction.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

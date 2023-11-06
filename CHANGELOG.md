@@ -1,3 +1,5 @@
+# [1.7.0](https://github.com/hiddentao/bigval/compare/v1.6.0...v1.7.0) (2023-11-06)
+
 # [1.6.0](https://github.com/hiddentao/bigval/compare/v1.5.0...v1.6.0) (2023-11-06)
 
 
